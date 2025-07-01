@@ -45,6 +45,8 @@ button:hover {
 }
 
 .weather-result {
+    display: flex;
+    background-color: coral;
     margin-top: 20px;
 }
 
