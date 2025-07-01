@@ -9,15 +9,29 @@
 </head>
 
 <body>
-    <div class="weather-dashboard">
-        <h1>Weather Dashboard</h1>
-        <div class="input-section">
-            <input type="text" id="city" placeholder="Enter city name" required>
-            <br>
-            <button id="getWeather">Get Weather</button>
+    <div class="rounded-container">
+        <div class="title-header">
+            <h1>5-Day  Forecast: Your Local Guide</h1>
         </div>
-        <div id="weatherResult" class="weather-result"></div>
-        <h2>Five Day Forecast</h2>
+        <div class="getlocationArea">
+            <h3>Type in your location</h3>
+            <input type="text" id="city" placeholder="Enter city name" required>
+            <button id="getWeather">get weather / forecast</button>
+        </div>
+            <div class="weather-dashboard">
+                <h1>Weather Dashboard</h1>
+                
+                <div class="input-section">
+                    <input type="text" id="city" placeholder="Enter city name" required>
+                    <br>
+                    <button id="getWeather">Get Weather</button>
+                </div>
+                <div id="weatherResult" class="weather-result"></div>
+                <h2>Five Day Forecast</h2>
+            </div>
+
+
+
     </div>
 
     <script src="./assets/js/script.js"></script>
