@@ -18,7 +18,7 @@ h4 {
 input {
     padding: 10px;
     width: 250px;
-    border: 1px solid #ccc;
+    border: 3px solid #ccc;
     border-radius: 5px;
     margin-left: 30px;
     margin-right: 30px;
@@ -75,10 +75,16 @@ button:hover {
 .container-info {
     display: flex;
     flex-wrap: wrap;
-    justify-content:flex-start;
+    justify-content:center;
     align-items: center;
 }
-.getLocationArea {
+.getLocationText {
+    display: block;
+}
+.getLocationInput {
+    display: block;
+}
+.getButtonInput {
     display: block;
 }
 /* end container info for search */
@@ -88,7 +94,7 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 }
 .weather-result {
@@ -96,27 +102,29 @@ button:hover {
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-evenly;
-    background-color: rgb(204, 205, 238);
+    background-color: #87ceeb;
     border: 1px solid rgb(176, 174, 179);
     border-radius: 10px;
 }
 .weather-result p {
     margin-left: 20px;
+    font-size: 16px;
 }
 .weather-result h4 {
     margin-left: 20px;
 }
-.weather-result img {
-    margin: o auto;
-}
 .weather-cards {
     display: flex;
     flex-wrap: wrap;
-    background-color: #ffffff;
+    background-color: #fdfd96;
     border: 2px solid #a73e1f;
     border-radius: 5px;
-    width: 500px;
-    height: 100px;
+    width: 275px;
+    height: auto;
     margin: 10px;
+}
+.weather-cards img {
+    display: block;
+    margin: 0 auto;
 }
 /* end weather results */

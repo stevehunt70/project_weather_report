@@ -28,6 +28,8 @@ document.getElementById("getWeather").addEventListener("click", function(){
                 const date = new Date(forecast.dt_txt).toDateString();
                 const temp = forecast.main.temp;
                 const description = forecast.weather[0].description;
+                const icon = forecast.weather[0].icon;
+                const humidity = forecast.humidity;
                 j += 8;
 
                 /*var mainContentEl = document.querySelector(".weatherResult");
@@ -41,7 +43,13 @@ document.getElementById("getWeather").addEventListener("click", function(){
                 newH2El.textContent = newDivEl.innerHTML;
                 newDivEl.appendChild(newH2El);
                 mainContentEl.appendChild(newDivEl);*/
-                document.getElementById(`WeatherResult${i}`).innerHTML = `<p><strong>${date}</strong>:${temp} C,${description}</p>`;
+                document.getElementById(`WeatherResult${i}`).innerHTML = `
+                <p><strong>Date: </strong>${date}</p>
+                <p><strong>Temp: </strong>${temp} C</P>
+                <P><strong>Condition: </strong>${description}</p>
+                <p><strong>Humidity: </strong>${humidity}</p>
+                <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${description}">
+                `;
                 
             }  
         })
