@@ -2,11 +2,7 @@ const API_KEY = "f23ee9deb4e1a7450f3157c44ed020e1";
 
 document.getElementById("getWeather").addEventListener("click", function(){
     const city = document.getElementById("city").value;
-    const weatherResult = document.getElementById("weatherResult");
-
-    //make current results disappear
-    weatherResult.innerHTML = "";
-
+    
     // get the latitude and longitude for the city
     const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`;
 
@@ -18,10 +14,14 @@ document.getElementById("getWeather").addEventListener("click", function(){
             //error if no city found
             if(geoData.length === 0) throw new Error("Location not found, try again. Be more specific!!")
             const {lat, lon, name, country} = geoData[0];            
-            const weatherForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+            const weatherForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=f23ee9deb4e1a7450f3157c44ed020e1`;
             return fetch(weatherForecastUrl);
         })
-        .then(weatherData => {
+        .then((response) => {
+            if(!response.ok)throw new Error("Forecast data not available");
+                return response.json();
+        })
+        .then((weatherData) => {
             let j = 0;
             for(let i=0; i<5; i++){
                 const forecast = weatherData.list[j];
@@ -30,12 +30,19 @@ document.getElementById("getWeather").addEventListener("click", function(){
                 const description = forecast.weather[0].description;
                 j += 8;
 
-                var mainContentEl = document.querySelector(".weatherResult");
+                /*var mainContentEl = document.querySelector(".weatherResult");
                 var newDivEl = document.createElement("div");
                 newDivEl.className = "weather-cards";
                 newDivEl.innerHTML = `<p><strong>${date}</strong>:${temp} C,${description}</p>`;
-                // append the new div to the main content
-                 mainContentEl.appendChild(newDivEl);
+                alert(newDivEl.innerHTML);
+                append the new div to the main content
+                mainContentEl.appendChild(newDivEl);
+                var newH2El = document.createElement("h2");
+                newH2El.textContent = newDivEl.innerHTML;
+                newDivEl.appendChild(newH2El);
+                mainContentEl.appendChild(newDivEl);*/
+                document.getElementById(`WeatherResult${i}`).innerHTML = `<p><strong>${date}</strong>:${temp} C,${description}</p>`;
+                
             }  
         })
         .catch((error) => {
