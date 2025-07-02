@@ -47,7 +47,7 @@ document.getElementById("getWeather").addEventListener("click", function(){
             `;
 
             weatherResult0.innerHTML = weatherHTML      
-            
+            //moving to next day data
             const {
                 list.dt_text[9],
                 //name,
