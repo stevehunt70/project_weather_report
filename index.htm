@@ -10,42 +10,38 @@
 
 <body>
     <div class="rounded-container">
+        
         <div class="title-header">
+            <img src="./assets/images/weather_logo.png" alt="weather">
             <h1>5-Day  Forecast: Your Local Guide</h1>
         </div>
-        <div class="getlocationArea">
-            <h3>Type in your location</h3>
-            <input type="text" id="city" placeholder="Enter city name" required>
-            <button id="getWeather">get weather / forecast</button>
-        </div>
-
-            <div class="weather-dashboard">
-                <h1>Weather Dashboard</h1>
-                
-                <div class="input-section">
-                    <input type="text" id="city" placeholder="Enter city name" required>
-                    <br>
-                    <button id="getWeather">Get Weather</button>
-                </div>
-                <div id="weatherResult" class="weather-result"></div>
-                <h2>Five Day Forecast</h2>
+        <div class="container-info">
+            <div class="getlocationArea">
+                <h3>Type in your location:</h3>
             </div>
-
-
-
-
-        <div id="weatherResult" class="weather-result">
-                <div class="weatherCards" id="WeatherResult0"></div>
-                <div class="weatherCards" id="WeatherResult1"></div>
-                <div class="weatherCards" id="WeatherResult2"></div>
-                <div class="weatherCards" id="WeatherResult3"></div>
-                <div class="weatherCards" id="WeatherResult4"></div>
+            <div>
+                <input type="text" id="city" placeholder="Enter city name" required>
+            </div>
+            <div>
+                <button id="getWeather">find your city's forecast</button>
+            </div>
+        </div>
+        <div class="section-divider"></div>
+    
+        <div>
+            <h3 align="center" id="titleForCity">Your 5-day forecast for City Name</h3>
+        </div>
+        <div class="weather-dashboard">
+            <div id="weatherResult" class="weather-result">
+                    <div class="weather-cards" id="WeatherResult0"></div><br>
+                    <div class="weather-cards" id="WeatherResult1"></div><br>
+                    <div class="weather-cards" id="WeatherResult2"></div><br>
+                    <div class="weather-cards" id="WeatherResult3"></div><br>
+                    <div class="weather-cards" id="WeatherResult4"></div>
+            </div>
         </div>
 
-        <div id="weatherResult" class="weather-result"></div>
-        <h2>Five Day Forecast</h2>
-
-
+        
     </div>
 
     <script src="./assets/js/script.js"></script>
