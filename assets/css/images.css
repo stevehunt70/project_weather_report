@@ -1,0 +1,19 @@
+
+/*css images for the weather project*/
+:root {
+    --lightWarmBackground: #FDE68A;
+    --warmBackground: #D97706;
+
+    /* using weather emoji unicodes*/
+    --rain: "\1f327";
+    --sunny: "1\f506";
+    --sun_cloud: "\1f324";
+    --stormy: "\1f329";
+    --snowy: "\1f328";
+    --windy: "\1f32C";
+}
+
+
+.weatherCard::before{
+    content: var(--sunny)
+}
