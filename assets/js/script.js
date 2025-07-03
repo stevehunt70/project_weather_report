@@ -2,6 +2,14 @@ const API_KEY = "f23ee9deb4e1a7450f3157c44ed020e1";
 
 document.getElementById("getWeather").addEventListener("click", function(){
     const city = document.getElementById("city").value;
+
+    // display  title for city selected 
+    const titleForCity = document.getElementById("titleForCity"); 
+    titleForCity.innerHTML = "5 day forecast for " + city;
+
+    // displays  the dashboad after city has been selected 
+    const weatherDashboard = document.getElementById("weather-dashboard");
+    weatherDashboard.style.display="flex";
     
     // get the latitude and longitude for the city
     const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}`;
