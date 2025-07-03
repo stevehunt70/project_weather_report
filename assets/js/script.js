@@ -54,6 +54,8 @@ document.getElementById("getWeather").addEventListener("click", function () {
           <button onclick="showDetail(${i})" style="margin-left:10px;margin-bottom:10px">Show Details</button>
         `;
 
+        document.querySelector('.weather-dashboard').style.visibility = 'visible';
+
         const hourlyHtml = `
           <h4>3 Hourly Forecast for ${day}</h4>
           <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;">
@@ -65,7 +67,7 @@ document.getElementById("getWeather").addEventListener("click", function () {
                   <strong>${time}</strong>
                   <img src="${iconUrl}" alt="${hour.weather[0].description}" /> <br>
                   <span>${hour.main.temp} °C</span> <br>
-                  <small>${hour.weather[0].description}</small>
+                  <small align="center">${hour.weather[0].description}</small>
                 </div>
               `;
             }).join("")}

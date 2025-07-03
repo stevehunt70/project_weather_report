@@ -104,6 +104,7 @@ button:hover {
     justify-content: center;
     width: 90%;
     margin: 0 auto;
+    visibility: hidden;
 }
 .weather-result {
     display: flex;
