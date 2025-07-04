@@ -1,6 +1,13 @@
 const API_KEY = "f23ee9deb4e1a7450f3157c44ed020e1";
 
+document.getElementById("city").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    document.getElementById("getWeather").click();
+  }
+});
+
 document.getElementById("getWeather").addEventListener("click", function () {
+ 
   const city = document.getElementById("city").value;
   if (!city) return;
 
