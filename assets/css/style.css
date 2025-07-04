@@ -3,11 +3,11 @@
     --mainTextColor: #525158;
 }
 body {
-    font-family: Verdana, sans-serif;
+    font-family: "Nunito", sans-serif;
     margin-top: 25px;
     display: flex;
     justify-content: center;
-    background-image: url(../images/weather-bgd3.jfif);
+    background-image: url(../images/weather-bgd.jfif);
     background-size: cover;
     background-blend-mode: lighten;
 }
@@ -38,8 +38,9 @@ button {
     cursor: pointer;
 }
 button:hover {
-    background-color: #c06f57;
-    color: #ffffff;
+    background-color: #fffd37;
+    color: #4436c2;
+    transform: scale(1.1);
 }
 /* end button layout */
 
@@ -96,7 +97,39 @@ button:hover {
     display: block;
 }
 /* end container info for search */
-
+/* start city details */
+.detail-for-city {
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    width: 25%;
+    justify-content: center;
+    border: 1px solid rgb(176, 174, 179);
+    border-radius: 10px;
+    margin: 0 auto;
+    background: rgba(white, white, white, 0.5);
+    visibility: hidden;
+}
+.city-card {
+    display: block;
+    border-top: 3px solid #6c3baa;
+    border-bottom: 3px solid #6c3baa;
+    border-radius: 8px;
+    background: rgba(209, 213, 219, 0.5);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.city-card p {
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 12px;
+}
+.city-card h4 {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 14px;
+}
+/* end city details #d1daf1 */
 /* start weather results */
 .weather-dashboard {
     display: flex;
@@ -106,6 +139,7 @@ button:hover {
     margin: 0 auto;
     visibility: hidden;
 }
+/* start 5 day forecast layout */
 .weather-result {
     display: flex;
     flex-wrap: wrap;
@@ -117,25 +151,37 @@ button:hover {
 }
 .weather-result p {
     margin-left: 20px;
-    font-size: 16px;
+    font-size: 14px;
 }
 .weather-result h4 {
     margin-left: 20px;
 }
 .weather-cards {
     display: flex;
-    flex-wrap: wrap;
-    background-color: #fdfd96;
-    border: 2px solid #a73e1f;
-    border-radius: 5px;
-    width: 275px;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-top: 6px solid #ff991c;
+    border-bottom: 6px solid #ff991c;
+    border-radius: 8px;
+    width: 220px;
     height: auto;
     margin: 10px;
 }
 .weather-cards img {
     display: block;
-    margin: 0 auto;
+    width: auto;
+    height: 75px;
+    margin-bottom: 5px;
 }
+.button-wrapper {
+    display: block;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 10px;
+}
+/* end 5 day forecast layout */
+/* start 3hr detail for the day */
 .weather-details-container {
     justify-content: space-between;
     display: flex;
@@ -154,9 +200,8 @@ button:hover {
   border-radius: 8px;
 }
 .weather-details img {
-    border: 1px solid #000000;
-    border-radius: 50%;
-    background-color: #d1daf1;
+    width: 50px;
+    height: auto;
 }
 .weather-detail-box {
     display: flex;
@@ -168,6 +213,12 @@ button:hover {
     padding: 10px;
     border-radius: 8px;
     width: 100px;
-    background: #d1daf1;
+    background: rgba(209,218,241,0.8);
 }
+.weather-detail-box:hover {
+    transform: scale(1.2);
+    border-left: 3px solid white;
+    border-right: 3px solid white;
+}
+/* end 3hr detail for the day */
 /* end weather results */
