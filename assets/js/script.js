@@ -21,8 +21,6 @@ document.getElementById("getWeather").addEventListener("click", function () {
 
       const { lat, lon, name, country, state } = geoData[0];
 
-      //document.getElementById("titleForCity").textContent =
-      //  `Your 5-day forecast for ${name}, ${country}`;
       document.getElementById('cityCard').innerHTML = `
         <h4>Your 5-Day Forecast:</h4>
         <p><strong>City: </strong>${name}</p>
@@ -59,7 +57,6 @@ document.getElementById("getWeather").addEventListener("click", function () {
         const day = new Date(summary.dt_txt).toDateString();
         const temp = summary.main.temp;
         const desc = summary.weather[0].description;
-        //const icon = summary.weather[0].icon;
         const customIcon = getCustomIcon(desc);
         const humidity = summary.main.humidity;
 
@@ -71,7 +68,6 @@ document.getElementById("getWeather").addEventListener("click", function () {
           <p><strong>Humidity: </strong>${humidity}%</p>
           <div class="button-wrapper"><button onclick="showDetail(${i})" style="margin-left:10px;margin-bottom:10px">show 3hr detail</button></div>
         `;
-//<img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${desc}">
         document.querySelector('.weather-dashboard').style.visibility = 'visible';
 
         const hourlyHtml = `
@@ -105,7 +101,7 @@ document.getElementById("getWeather").addEventListener("click", function () {
     })
     .catch((error) => {
       document.getElementById("weatherResult").innerHTML = `<p>${error.message}</p>`;
-      document.getElementById("weatherResult").style.color = "red";
+      document.getElementById("weatherResult").style.color = "red";      
     });
 });
 
