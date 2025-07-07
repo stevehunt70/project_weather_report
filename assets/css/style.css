@@ -97,6 +97,16 @@ button:hover {
     display: block;
 }
 /* end container info for search */
+/* start error text */
+.errorTextHere {
+    display: flex;
+    flex-wrap: wrap;
+    color:#ff000d;
+    font-size: 22px;
+    font-weight: bold;
+    visibility: hidden;
+}
+/*end error text */
 /* start city details */
 .detail-for-city {
     justify-content: space-between;

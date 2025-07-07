@@ -7,7 +7,6 @@ document.getElementById("city").addEventListener("keydown", function(event) {
 });
 
 document.getElementById("getWeather").addEventListener("click", function () {
- 
   const city = document.getElementById("city").value;
   if (!city) return;
 
@@ -16,18 +15,26 @@ document.getElementById("getWeather").addEventListener("click", function () {
   fetch(geoUrl)
     .then((response) => response.json())
     .then((geoData) => {
-      if (geoData.length === 0)
-        throw new Error("Location not found, try again. Be more specific!");
+      if (geoData.length === 0) {;
+        document.getElementById("errorTextHere").innerText = "Location not found or doesn't exist, please try again. Be more specific!";
+        //document.getElementById("errorTextHere").style.display = "block";
+        document.querySelector(".errorTextHere").style.visibility = "visible";
+        document.querySelector('.weather-dashboard').style.visibility = 'hidden';
+        document.querySelector('.detail-for-city').style.visibility = 'hidden';
+        throw new Error(); // exit chain
+      }
 
       const { lat, lon, name, country, state } = geoData[0];
+
+      document.getElementById("errorTextHere").style.display = "none";
 
       document.getElementById('cityCard').innerHTML = `
         <h4>Your 5-Day Forecast:</h4>
         <p><strong>City: </strong>${name}</p>
-        <p><strong>Country: </strong>${country}, ${state}</p>
+        <p><strong>Country: </strong>${country}${state ? ", " + state : ""}</p>
         <p><strong>Longitude: </strong>${lon}</p>
         <p><strong>Latitude: </strong>${lat}</p>
-        `;
+      `;
 
       document.querySelector('.detail-for-city').style.visibility = 'visible';
 
@@ -39,8 +46,10 @@ document.getElementById("getWeather").addEventListener("click", function () {
       return response.json();
     })
     .then((weatherData) => {
-      const dailyGroups = {};
+      document.getElementById("errorTextHere").style.display = "none";
+      document.querySelector('.weather-dashboard').style.visibility = 'visible';
 
+      const dailyGroups = {};
       weatherData.list.forEach((forecast) => {
         const dateStr = forecast.dt_txt.split(" ")[0];
         if (!dailyGroups[dateStr]) {
@@ -68,16 +77,14 @@ document.getElementById("getWeather").addEventListener("click", function () {
           <p><strong>Humidity: </strong>${humidity}%</p>
           <div class="button-wrapper"><button onclick="showDetail(${i})" style="margin-left:10px;margin-bottom:10px">show 3hr detail</button></div>
         `;
-        document.querySelector('.weather-dashboard').style.visibility = 'visible';
 
         const hourlyHtml = `
           <h4>3 Hourly Forecast for ${day}</h4>
           <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;">
             ${dayData.map(hour => {
-
               const dateObj = new Date(hour.dt_txt);
-              const time = new Date(hour.dt_txt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-              const hourOfDay = dateObj.getHours()
+              const time = dateObj.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+              const hourOfDay = dateObj.getHours();
               const iconUrl = getCustomIcon(hour.weather[0].description, hourOfDay);
               
               return `
@@ -100,8 +107,12 @@ document.getElementById("getWeather").addEventListener("click", function () {
       });
     })
     .catch((error) => {
-      document.getElementById("weatherResult").innerHTML = `<p>${error.message}</p>`;
-      document.getElementById("weatherResult").style.color = "red";      
+      if (error.message) {
+        document.getElementById("errorTextHere").innerText = error.message;
+      }
+      document.getElementById("errorTextHere").style.display = "block";
+      document.querySelector('.weather-dashboard').style.visibility = 'hidden';
+      document.querySelector('.detail-for-city').style.visibility = 'hidden';
     });
 });
 
@@ -113,31 +124,37 @@ function showDetail(dayIndex) {
 }
 
 function getCustomIcon(desc, hour) {
-    const iconMap = {
-        "clear sky": "sunny.png",
-        "few clouds": "cloudy-sunny.png",
-        "scattered clouds": "scattered-clouds.png",
-        "broken clouds": "cloudy-sunny.png",
-        "shower rain": "cloudy-showers.png",
-        "light rain" : "cloudy-showers.png",
-        "rain": "rain.png",
-        "thunderstorm": "cloudy-storm-sunny.png",
-        "snow": "snow.png",
-        "mist": "mist.png",
-        "overcast clouds": "scattered-clouds.png",
-    }
-    const lowerDesc = desc.toLowerCase();
-    const key = Object.keys(iconMap).find(k => lowerDesc.includes(k));
+  const iconMap = {
+    "clear sky": "sunny.png",
+    "few clouds": "cloudy-sunny.png",
+    "scattered clouds": "scattered-clouds.png",
+    "broken clouds": "cloudy-sunny.png",
+    "shower rain": "cloudy-showers.png",
+    "light rain" : "cloudy-showers.png",
+    "rain": "rain.png",
+    "thunderstorm": "cloudy-storm-sunny.png",
+    "snow": "snow.png",
+    "mist": "mist.png",
+    "overcast clouds": "scattered-clouds.png",
+  };
 
-    if(lowerDesc === 'clear sky' && (hour < 6 || hour >= 20)) {
-      return "clear-night.png";
-    } else if((lowerDesc === 'scattered clouds' || lowerDesc ==='broken clouds' 
-      || lowerDesc ==='few clouds' || lowerDesc ==='overcast clouds')  
-      && (hour < 6 || hour >= 20)) {
-        return "cloudy-night.png"
-    } else if((lowerDesc === 'light rain' || lowerDesc === 'rain')
-      && (hour < 6 || hour >= 20)) {
-        return "rain-night.png"
-      }
-    return iconMap[key] || "sunny.png";
-};
+  const lowerDesc = desc.toLowerCase();
+  const key = Object.keys(iconMap).find(k => lowerDesc.includes(k));
+
+  if (lowerDesc === 'clear sky' && (hour < 6 || hour >= 20)) {
+    return "clear-night.png";
+  } else if (
+    (lowerDesc === 'scattered clouds' || lowerDesc === 'broken clouds' 
+    || lowerDesc === 'few clouds' || lowerDesc === 'overcast clouds')  
+    && (hour < 6 || hour >= 20)
+  ) {
+    return "cloudy-night.png";
+  } else if (
+    (lowerDesc === 'light rain' || lowerDesc === 'rain')
+    && (hour < 6 || hour >= 20)
+  ) {
+    return "rain-night.png";
+  }
+
+  return iconMap[key] || "sunny.png";
+}
